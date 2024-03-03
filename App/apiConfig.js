@@ -2,7 +2,7 @@
 const apiConfig = {
   // b2Scopes:[],
     b2cScopes: ["https://workstreamautomation021.onmicrosoft.com/ms-identity-b2c-javascript-spa/user.read"],
-    webApi: "https://graph.microsoft.com/v1.0/users"
+    webApi: "https://mango-desert-012459f10.5.azurestaticapps.net/"
   };
 
 
