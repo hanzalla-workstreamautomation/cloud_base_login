@@ -1,0 +1,124 @@
+*{
+    font-family: Arial, sans-serif;
+}
+
+body {
+    
+    background-color: #E5E5E5;
+    padding: 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar{
+    background-color: #FFFFFF;
+    color: #1e1d1d;
+}
+
+#title-div{
+    color: #1e1d1d;
+    margin-left: 2.5rem;
+}
+
+/* .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+} */
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+    margin-left: 5rem;
+    margin-top: 1rem;
+    
+    
+}
+
+.menu li {
+    /* background: #ffffff; */
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: #F0F0F0;
+}
+
+
+#userProfileButton {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    padding: 0; /* Padding ki value ko 0 karein */
+    transition: background-color 0.3s ease;
+}
+#userProfileButton:hover {
+background-color: rgb(193, 193, 193); /* Hover pe background color change karein */
+    color: rgb(251, 243, 243);
+}
+
+.menu li:hover,
+.menu li.active {
+    background: #dddddd;
+}
+
+.search-area {
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.search-field {
+    flex-basis: calc(25% - 10px);
+}
+
+.search-field input,
+.search-field select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+.search-field label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.menu{
+    /* border: 2px solid red; */
+    width: 40%;
+    padding: 8px;
+    background-color: #F0F0F0;
+    border-radius: 5px;
+}
+label{
+    font-weight: bold;
+}
+/* .user-icon {
+    cursor: pointer;
+} */

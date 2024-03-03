@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Vanilla JavaScript SPA</title>
+  <link rel="SHORTCUT ICON" href="./favicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- msal.min.js can be used in the place of msal.js; included msal.js to make debug easy -->
+  <script src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.js"
+    integrity="sha384-o4ufwq3oKqc7IoCcR08YtZXmgOljhTggRwxP2CLbSqeXGtitAxwYaUln/05nJjit"
+    crossorigin="anonymous"></script>
+
+  <!-- adding Bootstrap 4 for UI components  -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body style="background-color: #E5E5E5;">
+  <nav class="navbar navbar-expand-lg ">
+    <a class="navbar-brand" id="title-div" href="#">Workstream Automation</a>
+    <div class="ml-auto" id="navbarButtons">
+      <button type="button" id="signIn" class="btn btn-link text-white bg-primary font-weight-normal"
+        onclick="signIn()">Sign In</button>
+      <button type="button" id="userProfileButton" 
+        style="display: none;" onclick="toggleUserProfile()">👤
+      </button>
+    </div>
+  </nav>
+  <!-- User Profile Container -->
+  <!-- User Profile Container -->
+  <!-- User Profile Container -->
+  <div id="userProfileContainer" class="container mt-4"
+    style="display: none; width: 20%; position: fixed; top: 20px; right: 20px;z-index: 999; ">
+    <div class="card">
+      <!-- Profile Image -->
+      <img src="./Favicon.png" class="bg-primary card-img-top rounded-circle mx-auto mt-3"
+        style="width: 150px; height: 150px;" alt="Profile Image">
+
+      <!-- Card Body -->
+      <div class="card-body  text-center">
+        <!-- List of items -->
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><span id="welcome-div"></span></li>
+          <li class="list-group-item"><span id="email-div"></span></li>
+        </ul>
+      </div>
+
+      <!-- Card Footer -->
+      <div class="card-footer">
+        <!-- Buttons -->
+        <div class="text-center">
+          <button type="button" id="editProfileButton" class="btn btn-primary mr-2" onclick="editProfile()">Edit
+            Profile</button>
+          <button type="button" id="signOut" class="btn btn-danger" onclick="signOut()">Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container to hold the content from desktop.html -->
+  
+  <ul class="menu">
+    <li class="active">Apps</li>
+    <li>Processes</li>
+    <li>Forms</li>
+    <li>Dashboard</li>
+    <li>Pages</li>
+  </ul>
+
+<div class="search-area" style="background-color: #E5E5E5;">
+  <div class="search-field">
+    <label for="app-name">App Name</label>
+    <input type="text" id="app-name">
+  </div>
+  <div class="search-field">
+    <label for="app-version">App Version</label>
+    <select id="app-version">
+      <option>Public</option>
+      <option>Private</option>
+    </select>
+  </div>
+  <div class="search-field">
+    <label for="process-name">Process Name</label>
+    <input type="text" id="process-name">
+  </div>
+  <div class="search-field">
+    <label for="process-version">Process Version</label>
+    <select id="process-version">
+      <option>Public</option>
+      <option>Private</option>
+    </select>
+  </div>
+</div>
+  <!-- Content -->
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header text-center">Workstream Automation PVT LTD</h5>
+      <div class="card-body text-center">
+        <h5 id="label" class="card-title">Sign-in with Microsoft Azure AD B2C</h5>
+        <pre id="response" class="card-text"></pre>
+        <button type="button" id="callApiButton" class="btn btn-primary d-none" onclick="passTokenToApi()">Call
+          API</button>
+          <div id="userDetails"></div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- importing bootstrap.js and supporting js libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- importing app scripts (load order is important) -->
+  <script type="text/javascript" src="./apiConfig.js"></script>
+  <script type="text/javascript" src="./policies.js"></script>
+  <script type="text/javascript" src="./authConfig.js"></script>
+  <script type="text/javascript" src="./ui.js"></script>
+
+  <!-- <script type="text/javascript" src="./authRedirect.js"></script>   -->
+  <!-- uncomment the above line and comment the line below if you would like to use the redirect flow -->
+  <script type="text/javascript" src="./authPopup.js"></script>
+  <script type="text/javascript" src="./api.js"></script>
+</body>
+
+</html>
