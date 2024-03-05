@@ -1,28 +1,28 @@
-// function callApi(endpoint, token) {
+function callApi(endpoint, token) {
     
-//     const headers = new Headers();
-//     const bearer = `Bearer ${token}`;
-//     console.log(token);
+    const headers = new Headers();
+    const bearer = `Bearer ${token}`;
+    console.log(token);
   
-//     headers.append("Authorization", bearer);
+    headers.append("Authorization", bearer);
   
-//     const options = {
-//         method: "GET",
-//         headers: headers
-//       };
+    const options = {
+        method: "GET",
+        headers: headers
+      };
   
-//     logMessage('Calling web API...');
+    logMessage('Calling web API...');
     
-//     fetch(endpoint, options)
-//       .then(response => response.json())
-//       .then(response => {
+    fetch(endpoint, options)
+      .then(response => response.json())
+      .then(response => {
 
-//         if (response) {
-//           logMessage('Web API responded: ' + response.name);
-//         }
+        if (response) {
+          logMessage('Web API responded: ' + response.name);
+        }
         
-//         return response;
-//       }).catch(error => {
-//         console.error(error);
-//       });
-//   }
+        return response;
+      }).catch(error => {
+        console.error(error);
+      });
+  }
