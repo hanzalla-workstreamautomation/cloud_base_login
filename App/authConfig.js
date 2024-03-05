@@ -11,6 +11,7 @@ const msalConfig = {
       clientId: "f3f29b7d-4e98-4a0b-a84d-38f65aab2017", // This is the ONLY mandatory field; everything else is optional.
       authority: b2cPolicies.authorities.signUpSignIn.authority, // Choose sign-up/sign-in user-flow as your default.
       knownAuthorities: ["workstreamautomation021.b2clogin.com"], // You must identify your tenant's domain as a known authority.
+      // redirectUri: "https://mango-desert-012459f10.5.azurestaticapps.net", // You must register this URI on Azure Portal/App Registration. Defaults to "window.location.href".
       redirectUri: "https://mango-desert-012459f10.5.azurestaticapps.net", // You must register this URI on Azure Portal/App Registration. Defaults to "window.location.href".
     },
     cache: {

@@ -1,8 +1,8 @@
 // The current application coordinates were pre-registered in a B2C tenant.
 const apiConfig = {
   // b2Scopes:[],
-    b2cScopes: ["https://workstreamautomation021.onmicrosoft.com/ms-identity-b2c-javascript-spa/user.read"],
-    webApi: "https://mango-desert-012459f10.5.azurestaticapps.net/"
+    b2cScopes: ["https://workstreamautomation021.onmicrosoft.com/api/accesstoken/user.write"],
+    webApi: "https://azure-ad-b2c.azurewebsites.net/api/"
   };
 
 
