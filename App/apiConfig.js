@@ -2,7 +2,7 @@
 const apiConfig = {
   // b2Scopes:[],
     b2cScopes: ["https://workstreamautomation021.onmicrosoft.com/api/accesstoken/user.write"],
-    webApi: "https://azure-ad-b2c-cloudlogin-api.azure-api.net/api/LoginTrigger"
+    webApi: "https://azure-ad-b2c-apim.azure-api.net/api"
   };
 
 
