@@ -2,9 +2,14 @@
 // configuration parameters are located at authConfig.js
 const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
+
+
 let accountId = "";
 let username = "";
 let accessToken = null;
+
+const jwt = require('jsonwebtoken');
+
 
 myMSALObj.handleRedirectPromise()
     .then(response => {
@@ -160,18 +165,38 @@ function getTokenRedirect(request) {
       });
   }
  
-// Acquires and access token and then passes it to the API call
-function passTokenToApi() {
+  function passTokenToApi() {
     if (!accessToken) {
-        getTokenRedirect(tokenRequest);
+      getTokenRedirect(tokenRequest);
     } else {
-        try {
-            callApi(apiConfig.webApi, accessToken);
-        } catch(error) {
-            console.log(error); 
+      try {
+        const decodedToken = jwt.decode(accessToken, { complete: true });
+        if (decodedToken) {
+          const table = document.createElement('table');
+          const headerRow = document.createElement('tr');
+          const keys = Object.keys(decodedToken.payload);
+          keys.forEach(key => {
+            const th = document.createElement('th');
+            th.textContent = key;
+            headerRow.appendChild(th);
+          });
+          table.appendChild(headerRow);
+          const valuesRow = document.createElement('tr');
+          keys.forEach(key => {
+            const td = document.createElement('td');
+            td.textContent = decodedToken.payload[key];
+            valuesRow.appendChild(td);
+          });
+          table.appendChild(valuesRow);
+          document.body.appendChild(table);
+          callApi(apiConfig.webApi, accessToken);
         }
+      } catch (error) {
+        console.log(error);
+      }
     }
-}
+  }
+  
 
 /**
  * To initiate a B2C user-flow, simply make a login request using
