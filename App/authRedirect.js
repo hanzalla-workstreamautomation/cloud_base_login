@@ -8,7 +8,7 @@ let accountId = "";
 let username = "";
 let accessToken = null;
 
-const jwt = require('jsonwebtoken');
+
 
 
 myMSALObj.handleRedirectPromise()
