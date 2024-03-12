@@ -1,5 +1,6 @@
 // Create the main myMSALObj instance
 // configuration parameters are located at authConfig.js
+const jwt = require('jsonwebtoken');
 const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 let accountId = "";
@@ -19,6 +20,16 @@ function setAccount(account) {
     //console.log(accounts);
     // loadDesktopContent();
 }
+
+function decodeAccessToken(accessToken) {
+    try {
+      const decodedToken = jwt.decode(accessToken, { complete: true });
+      return decodedToken.payload;
+    } catch (error) {
+      console.error('Error decoding access token:', error);
+      return null;
+    }
+  }
 
 function toggleUserProfile() {
     var userProfileContainer = document.getElementById("userProfileContainer");
@@ -168,17 +179,37 @@ function getTokenPopup(request) {
 
 function passTokenToApi() {
     getTokenPopup(tokenRequest)
-        .then(response => {
-            if (response) {
-                console.log("access_token acquired at: " + new Date().toString());
-                try {
-                    callApi(apiConfig.webApi, response.accessToken);
-                } catch (error) {
-                    console.log(error);
-                }
+      .then(response => {
+        if (response) {
+          console.log("access_token acquired at: " + new Date().toString());
+          const decodedToken = decodeAccessToken(response.accessToken);
+          if (decodedToken) {
+            const table = document.createElement('table');
+            const headerRow = document.createElement('tr');
+            const keys = Object.keys(decodedToken);
+            keys.forEach(key => {
+              const th = document.createElement('th');
+              th.textContent = key;
+              headerRow.appendChild(th);
+            });
+            table.appendChild(headerRow);
+            const valuesRow = document.createElement('tr');
+            keys.forEach(key => {
+              const td = document.createElement('td');
+              td.textContent = decodedToken[key];
+              valuesRow.appendChild(td);
+            });
+            table.appendChild(valuesRow);
+            document.body.appendChild(table);
+            try {
+              callApi(apiConfig.webApi, response.accessToken);
+            } catch (error) {
+              console.log(error);
             }
-        });
-}
+          }
+        }
+      });
+  }
 
 // function fetchUserData() {
 //     const tokenRequest = {
