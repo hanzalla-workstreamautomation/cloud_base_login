@@ -1,6 +1,6 @@
 // Create the main myMSALObj instance
 // configuration parameters are located at authConfig.js
-
+const jwt = require('jsonwebtoken');
 const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 
@@ -23,8 +23,8 @@ function setAccount(account) {
 }
 
 function decodeAccessToken(accessToken) {
-    try {
-      const decodedToken = jwtDecode(accessToken, { complete: true });
+  try {
+    const decodedToken = jwt.decode(accessToken);
       return decodedToken.payload;
     } catch (error) {
       console.error('Error decoding access token:', error);
