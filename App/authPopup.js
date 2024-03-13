@@ -1,8 +1,8 @@
 // Create the main myMSALObj instance
 // configuration parameters are located at authConfig.js
-const jwt = require('jsonwebtoken');
+
 const myMSALObj = new msal.PublicClientApplication(msalConfig);
-const jwt = JWT;
+
 
 let accountId = "";
 let username = "";
